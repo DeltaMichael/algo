@@ -3,7 +3,7 @@
 <head><meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>algorithms</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>index</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 
 
 
@@ -14711,10 +14711,151 @@ Only one valid answer exists.
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h1 id="Trees">Trees<a class="anchor-link" href="#Trees">&#182;</a></h1>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Binary-Tree-Maximum-Path-Sum">Binary Tree Maximum Path Sum<a class="anchor-link" href="#Binary-Tree-Maximum-Path-Sum">&#182;</a></h3><p>A path in a binary tree is a sequence of nodes where each pair of adjacent nodes in the sequence has an edge connecting them. A node can only appear in the sequence at most once. Note that the path does not need to pass through the root.</p>
+<p>The path sum of a path is the sum of the node's values in the path.</p>
+<p>Given the root of a binary tree, return the maximum path sum of any non-empty path.</p>
+<p>Example 1:</p>
+<p><img src="https://assets.leetcode.com/uploads/2020/10/13/exx1.jpg" alt="img" /></p>
+<pre><code>Input: root = [1,2,3]
+Output: 6
+Explanation: The optimal path is 2 -&gt; 1 -&gt; 3 with a path sum of 2 + 1 + 3 = 6.
+Example 2:
+</code></pre>
+<p><img src="https://assets.leetcode.com/uploads/2020/10/13/exx2.jpg" alt="img" />
+Example 2:</p>
+<pre><code>Input: root = [-10,9,20,null,null,15,7]
+Output: 42
+Explanation: The optimal path is 15 -&gt; 20 -&gt; 7 with a path sum of 15 + 20 + 7 = 42.
+</code></pre>
+<p>Constraints:</p>
+<pre><code>The number of nodes in the tree is in the range [1, 3 * 104].
+-1000 &lt;= Node.val &lt;= 1000
+</code></pre>
+<h4 id="Solution">Solution<a class="anchor-link" href="#Solution">&#182;</a></h4><h5 id="Observations">Observations<a class="anchor-link" href="#Observations">&#182;</a></h5><p>A path consists of a left and right subtree, connected by a root. The root signifies that the path has been completed. After the root has been added, we cannot keep adding nodes above the root.</p>
+<p>The left and right subtree are basically a bunch of nodes with only a left or right child. These nodes form a continuous path.</p>
+<p>If both the left and right subtree are negative, it's not even worth considering ending the path there, because we will always lose value. It's best to consider a negative path to be 0 for easier calculation</p>
+<p>When we traverse the tree and land on a specific node, we have three choices.</p>
+<ol>
+<li>We pick both the left and right subtree, add them to the node and end the path there</li>
+<li>We pick the left subtree, add current value to it and continue traversing</li>
+<li>We pick the right subtree, add current value to it and continue traversing</li>
+</ol>
+<h5 id="Description">Description<a class="anchor-link" href="#Description">&#182;</a></h5><pre><code>Base case:
+    If current node is null -&gt; return 0
+Common case:
+    traverse left subtree recursively
+    traverse right subtree recursively
+    pick the max of 0 and left sum
+    pick the max of 0 and right sum
+    add the current node and both max values and compare to global max
+        set global max to current max if current max is greater
+    return max of current_node + left_max and current node + right max
+</code></pre>
+<h5 id="Example">Example<a class="anchor-link" href="#Example">&#182;</a></h5><p>The left and right squares above each node represent the max sum for each subtree when that node is reached on traversal. The middle square represents the sum if we were to choose that node and complete the path. The max path value is clearly 23.</p>
+<p><img src="img/binary-tree-max-path.png" alt="img" /></p>
 
 </div>
 </div>
 </div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+
+<span class="k">class</span> <span class="nc">TreeNode</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">left</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">val</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">left</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">right</span>
+
+
+<span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">maxPathSum</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">TreeNode</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">max_path</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;-inf&#39;</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">get_max_gain</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+            <span class="k">nonlocal</span> <span class="n">max_path</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">node</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mi">0</span>
+
+            <span class="n">left_gain</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">get_max_gain</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">left</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="n">right_gain</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">get_max_gain</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">right</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
+
+            <span class="n">stop_gain</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">val</span> <span class="o">+</span> <span class="n">left_gain</span> <span class="o">+</span> <span class="n">right_gain</span>
+            <span class="n">max_path</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_path</span><span class="p">,</span> <span class="n">stop_gain</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">val</span> <span class="o">+</span> <span class="n">left_gain</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">val</span> <span class="o">+</span> <span class="n">right_gain</span><span class="p">)</span>
+        <span class="n">get_max_gain</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">max_path</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">TreeNode</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="n">TreeNode</span><span class="p">(</span><span class="mi">9</span><span class="p">),</span> <span class="n">TreeNode</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="n">TreeNode</span><span class="p">(</span><span class="mi">15</span><span class="p">),</span> <span class="n">TreeNode</span><span class="p">(</span><span class="mi">7</span><span class="p">)))</span>
+<span class="n">out</span> <span class="o">=</span> <span class="n">Solution</span><span class="p">()</span><span class="o">.</span><span class="n">maxPathSum</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">TreeNode</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="n">TreeNode</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">TreeNode</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="n">TreeNode</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">),</span> <span class="n">TreeNode</span><span class="p">(</span><span class="o">-</span><span class="mi">8</span><span class="p">))),</span> <span class="n">TreeNode</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="n">TreeNode</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">TreeNode</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">TreeNode</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">TreeNode</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span> <span class="n">TreeNode</span><span class="p">(</span><span class="mi">4</span><span class="p">)),</span> <span class="n">TreeNode</span><span class="p">(</span><span class="mi">2</span><span class="p">)),</span> <span class="n">TreeNode</span><span class="p">(</span><span class="mi">6</span><span class="p">))))</span>
+<span class="n">out</span> <span class="o">=</span> <span class="n">Solution</span><span class="p">()</span><span class="o">.</span><span class="n">maxPathSum</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>42
+23
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
 </div>
 </body>
 
