@@ -14711,7 +14711,7 @@ Only one valid answer exists.
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Trees">Trees<a class="anchor-link" href="#Trees">&#182;</a></h1>
+<h1 id="Trees-And-Graphs">Trees And Graphs<a class="anchor-link" href="#Trees-And-Graphs">&#182;</a></h1>
 </div>
 </div>
 </div>
@@ -15114,6 +15114,114 @@ Space complexity is O(N), because we store the children and in-degrees for every
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Flood-Fill">Flood Fill<a class="anchor-link" href="#Flood-Fill">&#182;</a></h3><p>An image is represented by an m x n integer grid image where image[i][j] represents the pixel value of the image.</p>
+<p>You are also given three integers sr, sc, and color. You should perform a flood fill on the image starting from the pixel image[sr][sc].</p>
+<p>To perform a flood fill, consider the starting pixel, plus any pixels connected 4-directionally to the starting pixel of the same color as the starting pixel, plus any pixels connected 4-directionally to those pixels (also with the same color), and so on. Replace the color of all of the aforementioned pixels with color.</p>
+<p>Return the modified image after performing the flood fill.</p>
+<p>Example 1:
+<img src="https://assets.leetcode.com/uploads/2021/06/01/flood1-grid.jpg" alt="" /></p>
+<pre><code>Input: image = [[1,1,1],[1,1,0],[1,0,1]], sr = 1, sc = 1, color = 2
+Output: [[2,2,2],[2,2,0],[2,0,1]]
+Explanation: From the center of the image with position (sr, sc) = (1, 1) (i.e., the red pixel), all pixels connected by a path of the same color as the starting pixel (i.e., the blue pixels) are colored with the new color.
+Note the bottom corner is not colored 2, because it is not 4-directionally connected to the starting pixel.
+</code></pre>
+<p>Example 2:</p>
+<pre><code>Input: image = [[0,0,0],[0,0,0]], sr = 0, sc = 0, color = 0
+Output: [[0,0,0],[0,0,0]]
+Explanation: The starting pixel is already colored 0, so no changes are made to the image.
+</code></pre>
+<p>Constraints:</p>
+<pre><code>m == image.length
+n == image[i].length
+1 &lt;= m, n &lt;= 50
+0 &lt;= image[i][j], color &lt; 216
+0 &lt;= sr &lt; m
+0 &lt;= sc &lt; n
+</code></pre>
+<h4 id="Solution">Solution<a class="anchor-link" href="#Solution">&#182;</a></h4><h4 id="Observations">Observations<a class="anchor-link" href="#Observations">&#182;</a></h4><p>Our subproblem is taking a pixel and coloring it.
+The choices we make are whether we go up, down, left or right.
+The constraints we have are: going outside the array, hitting a different color, hitting the same color initially</p>
+<h4 id="Solution-description">Solution description<a class="anchor-link" href="#Solution-description">&#182;</a></h4><p>Base case: we go outside the array
+Base case: we hit a different color than the starting color
+Common case: we recurse up, down, left or right and change the initial color to the new one</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+
+<span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">floodFill</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]],</span> <span class="n">sr</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">sc</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]:</span>
+        <span class="k">def</span> <span class="nf">floodFillRec</span><span class="p">(</span><span class="n">image</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]],</span> <span class="n">sr</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">sc</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">sr</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">sr</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+                <span class="k">return</span>
+            <span class="k">if</span> <span class="n">sc</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">sc</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">image</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+                <span class="k">return</span>
+            <span class="k">if</span> <span class="n">image</span><span class="p">[</span><span class="n">sr</span><span class="p">][</span><span class="n">sc</span><span class="p">]</span> <span class="o">!=</span> <span class="n">init_color</span><span class="p">:</span>
+                <span class="k">return</span>
+            
+            <span class="n">image</span><span class="p">[</span><span class="n">sr</span><span class="p">][</span><span class="n">sc</span><span class="p">]</span> <span class="o">=</span> <span class="n">color</span>
+            <span class="n">floodFillRec</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">sr</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">sc</span><span class="p">)</span>
+            <span class="n">floodFillRec</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">sr</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">sc</span><span class="p">)</span>
+            <span class="n">floodFillRec</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">sr</span><span class="p">,</span> <span class="n">sc</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">floodFillRec</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">sr</span><span class="p">,</span> <span class="n">sc</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">init_color</span> <span class="o">=</span> <span class="n">image</span><span class="p">[</span><span class="n">sr</span><span class="p">][</span><span class="n">sc</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">color</span> <span class="o">==</span> <span class="n">init_color</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">image</span>
+        <span class="n">floodFillRec</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">sr</span><span class="p">,</span> <span class="n">sc</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">image</span>
+    
+<span class="n">image</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]]</span>
+<span class="n">out</span> <span class="o">=</span> <span class="n">Solution</span><span class="p">()</span><span class="o">.</span><span class="n">floodFill</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">sr</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">sc</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+
+<span class="n">image</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]]</span>
+<span class="n">out</span> <span class="o">=</span> <span class="n">Solution</span><span class="p">()</span><span class="o">.</span><span class="n">floodFill</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">sr</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">sc</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>[[2, 2, 2], [2, 2, 0], [2, 0, 1]]
+[[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h1 id="Recursion">Recursion<a class="anchor-link" href="#Recursion">&#182;</a></h1><h3 id="Generate-valid-pairs-of-parantheses">Generate valid pairs of parantheses<a class="anchor-link" href="#Generate-valid-pairs-of-parantheses">&#182;</a></h3><p><a href="https://leetcode.com/problems/generate-parentheses">https://leetcode.com/problems/generate-parentheses</a></p>
 <p>Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.</p>
 <pre><code>Example 1:
@@ -15305,7 +15413,7 @@ We do this by iterating on previous combinations and choosing whether to:</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h4 id="Iterative-Solution-using-Queue">Iterative Solution using Queue<a class="anchor-link" href="#Iterative-Solution-using-Queue">&#182;</a></h4><p>Note: Above solution is faster than this on leet code and us</p>
+<h4 id="Iterative-Solution-using-Queue">Iterative Solution using Queue<a class="anchor-link" href="#Iterative-Solution-using-Queue">&#182;</a></h4><p>Note: Above solution is faster than this on leet code and uses less memory. Doesn't make much sense, so might have something to do with the deque implementation or internal python implementation specifics.</p>
 
 </div>
 </div>
