@@ -14650,7 +14650,7 @@ Only one valid answer exists.
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[62]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
@@ -14773,7 +14773,7 @@ Common case:
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[63]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
@@ -14832,6 +14832,542 @@ Common case:
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>42
 23
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Number-of-Islands">Number of Islands<a class="anchor-link" href="#Number-of-Islands">&#182;</a></h3><p><a href="https://leetcode.com/problems/number-of-islands/">https://leetcode.com/problems/number-of-islands/</a></p>
+<p>Given an m x n 2D binary grid grid which represents a map of '1's (land) and '0's (water), return the number of islands.</p>
+<p>An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically. You may assume all four edges of the grid are all surrounded by water.</p>
+<pre><code>Example 1:
+
+Input: grid = [
+  [&quot;1&quot;,&quot;1&quot;,&quot;1&quot;,&quot;1&quot;,&quot;0&quot;],
+  [&quot;1&quot;,&quot;1&quot;,&quot;0&quot;,&quot;1&quot;,&quot;0&quot;],
+  [&quot;1&quot;,&quot;1&quot;,&quot;0&quot;,&quot;0&quot;,&quot;0&quot;],
+  [&quot;0&quot;,&quot;0&quot;,&quot;0&quot;,&quot;0&quot;,&quot;0&quot;]
+]
+Output: 1
+Example 2:
+
+Input: grid = [
+  [&quot;1&quot;,&quot;1&quot;,&quot;0&quot;,&quot;0&quot;,&quot;0&quot;],
+  [&quot;1&quot;,&quot;1&quot;,&quot;0&quot;,&quot;0&quot;,&quot;0&quot;],
+  [&quot;0&quot;,&quot;0&quot;,&quot;1&quot;,&quot;0&quot;,&quot;0&quot;],
+  [&quot;0&quot;,&quot;0&quot;,&quot;0&quot;,&quot;1&quot;,&quot;1&quot;]
+]
+Output: 3
+</code></pre>
+<p>Constraints:</p>
+<pre><code>m == grid.length
+n == grid[i].length
+1 &lt;= m, n &lt;= 300
+grid[i][j] is '0' or '1'.
+</code></pre>
+<h4 id="Solution">Solution<a class="anchor-link" href="#Solution">&#182;</a></h4><h5 id="Observations">Observations<a class="anchor-link" href="#Observations">&#182;</a></h5><p>An island can be determined by recursively traversing all the ones and setting them to another value.</p>
+<h5 id="Descilprtion">Descilprtion<a class="anchor-link" href="#Descilprtion">&#182;</a></h5><p>We traverse the array and every time we find a 1, we can count it as an island, invalidate all the adjacent cells recursively and continue traversing.</p>
+<h5 id="Complexity-Analysis">Complexity Analysis<a class="anchor-link" href="#Complexity-Analysis">&#182;</a></h5><p>Time complexity - <code>O(n*m)</code>, where n is the number of rows and m is the number of colums, e.g. we have to see each cell at least once</p>
+<p>Space complexity - <code>O(n*m)</code> in the worst case, e.g. the whole table is just 1s and we have to go max depth in the call stack.</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[64]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+
+<span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">numIslands</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grid</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">def</span> <span class="nf">recurse_island</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">grid</span><span class="p">):</span>
+                <span class="k">return</span>
+            <span class="k">if</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">grid</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+                <span class="k">return</span>
+            <span class="k">if</span> <span class="n">grid</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;1&quot;</span><span class="p">:</span>
+                <span class="k">return</span>
+            
+            <span class="n">grid</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;-1&quot;</span>
+            <span class="c1"># up</span>
+            <span class="n">recurse_island</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+            <span class="c1"># down</span>
+            <span class="n">recurse_island</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+            <span class="c1"># left</span>
+            <span class="n">recurse_island</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="c1"># right</span>
+            <span class="n">recurse_island</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        
+        <span class="n">islands</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">grid</span><span class="p">)):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">grid</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
+                <span class="k">if</span> <span class="n">grid</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;1&quot;</span><span class="p">:</span>
+                    <span class="n">islands</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="n">recurse_island</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">islands</span>
+
+<span class="n">grid</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">],</span>
+  <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">],</span>
+  <span class="p">[</span><span class="s2">&quot;0&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">,</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">],</span>
+  <span class="p">[</span><span class="s2">&quot;0&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">,</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;1&quot;</span><span class="p">]</span>
+<span class="p">]</span>
+<span class="n">out</span> <span class="o">=</span> <span class="n">Solution</span><span class="p">()</span><span class="o">.</span><span class="n">numIslands</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>[[&#39;-1&#39;, &#39;-1&#39;, &#39;0&#39;, &#39;0&#39;, &#39;0&#39;], [&#39;-1&#39;, &#39;-1&#39;, &#39;0&#39;, &#39;0&#39;, &#39;0&#39;], [&#39;0&#39;, &#39;0&#39;, &#39;-1&#39;, &#39;0&#39;, &#39;0&#39;], [&#39;0&#39;, &#39;0&#39;, &#39;0&#39;, &#39;-1&#39;, &#39;-1&#39;]]
+3
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Course-Schedule">Course Schedule<a class="anchor-link" href="#Course-Schedule">&#182;</a></h3><p><a href="https://leetcode.com/problems/number-of-islands/">https://leetcode.com/problems/number-of-islands/</a></p>
+<p>There are a total of numCourses courses you have to take, labeled from 0 to numCourses - 1. You are given an array prerequisites where prerequisites[i] = [ai, bi] indicates that you must take course bi first if you want to take course ai.</p>
+<p>For example, the pair [0, 1], indicates that to take course 0 you have to first take course 1.
+Return true if you can finish all courses. Otherwise, return false.</p>
+<p>Example 1:</p>
+<pre><code>Input: numCourses = 2, prerequisites = [[1,0]]
+Output: true
+Explanation: There are a total of 2 courses to take. 
+To take course 1 you should have finished course 0. So it is possible.
+Example 2:
+</code></pre>
+<pre><code>Input: numCourses = 2, prerequisites = [[1,0],[0,1]]
+Output: false
+Explanation: There are a total of 2 courses to take. 
+To take course 1 you should have finished course 0, and to take course 0 you should also have finished course 1. So it is impossible.
+</code></pre>
+<p>Constraints:</p>
+<pre><code>1 &lt;= numCourses &lt;= 2000
+0 &lt;= prerequisites.length &lt;= 5000
+prerequisites[i].length == 2
+0 &lt;= ai, bi &lt; numCourses
+All the pairs prerequisites[i] are unique.
+</code></pre>
+<h4 id="Solution">Solution<a class="anchor-link" href="#Solution">&#182;</a></h4><h5 id="Observations">Observations<a class="anchor-link" href="#Observations">&#182;</a></h5><p>Courses and prerequisites can be represented as nodes and edges in a directed graph, e.g.</p>
+<p>Course 0 is a node. Course 1 is also a node. If course 0 is a prerequisite for course 1, this is an edge between 1 and 0. This is represented by a pair [1,0]</p>
+<p>A course can be a requirement for multiple other courses, e.g. one node can have many children.
+A course can have multiple requirements, e.g. a node can be a child to multiple nodes.</p>
+<p>In case the graph is not fully connected, the courses can still be completed. This means there are courses that have no requirements, or just isolated connected components, whose requirements can be fulfilled.</p>
+<p>A condition for completion is that we're able to see all nodes, starting from nodes that have no requirements (they are not a child node of any node). If all nodes have requirements, this means that the we can't even start the process.</p>
+<p>Example 2 shows that we won't be able to complete course 0 if we don't take course 1 and vice-versa. This indicates a cycle in the graph.</p>
+<p>Being able to complete all courses means that there is no cycle in the graph. Not detecting a cycle in the graph means we can comoplete all courses</p>
+<h5 id="Solution-Description">Solution Description<a class="anchor-link" href="#Solution-Description">&#182;</a></h5><p>We assign an in-degree to each node. The in-degree answers the question: &quot;How many nodes is this node a child of&quot;. We start from nodes that have in-degree = 0. The requirements for those nodes have already been completed. We add those nodes to the queue. For each of their children, we decrement their in-degree (one of the requirements was fulfilled). If the in-degree is 0 (all requirements have been fulfilled), we add the child to the queue.</p>
+<p>Having a cycle means that we will have a node in the graph that always has an in-degree higher than what can be reached doing BFS and decrementing. That node will never end up on the queue, which means we won't see all nodes.</p>
+<h5 id="Complexity-Analysis">Complexity Analysis<a class="anchor-link" href="#Complexity-Analysis">&#182;</a></h5><p>Time complexity is O(E), because we traverse every edge in the graph.
+Space complexity is O(N), because we store the children and in-degrees for every node</p>
+<h4 id="Additional-Study">Additional Study<a class="anchor-link" href="#Additional-Study">&#182;</a></h4><ul>
+<li>Tarjan's Algorithm - <a href="https://www.youtube.com/watch?v=ZeDNSeilf-Y">https://www.youtube.com/watch?v=ZeDNSeilf-Y</a></li>
+<li>Topological sort<ul>
+<li>DFS - <a href="https://www.youtube.com/watch?v=rKQaZuoUR4M">https://www.youtube.com/watch?v=rKQaZuoUR4M</a></li>
+<li>BFS (Kahn's Algorithm) - <a href="https://www.youtube.com/watch?v=tggiFvaxjrY">https://www.youtube.com/watch?v=tggiFvaxjrY</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[65]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+<span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">canFinish</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">numCourses</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">prerequisites</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="n">graph</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numCourses</span><span class="p">)]</span>
+        <span class="n">indegrees</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numCourses</span><span class="p">)]</span>
+        <span class="n">bfs</span> <span class="o">=</span> <span class="n">deque</span><span class="p">([])</span>
+        <span class="c1"># Create the graph without isolated single nodes</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">prerequisites</span><span class="p">:</span>
+            <span class="n">children</span> <span class="o">=</span> <span class="n">graph</span><span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+            <span class="n">children</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            
+            <span class="n">indegrees</span><span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">+=</span> <span class="mi">1</span>
+        
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">d</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">indegrees</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">d</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">bfs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                
+        <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">indegrees</span><span class="p">)</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">bfs</span><span class="p">):</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="n">bfs</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">[</span><span class="n">node</span><span class="p">]:</span>
+                <span class="n">indegrees</span><span class="p">[</span><span class="n">child</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="n">indegrees</span><span class="p">[</span><span class="n">child</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">bfs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
+            <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">indegrees</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">count</span> <span class="o">==</span> <span class="n">numCourses</span>
+                
+
+<span class="k">def</span> <span class="nf">showResult</span><span class="p">(</span><span class="n">numCourses</span><span class="p">,</span> <span class="n">preq</span><span class="p">):</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">Solution</span><span class="p">()</span><span class="o">.</span><span class="n">canFinish</span><span class="p">(</span><span class="n">numCourses</span><span class="p">,</span> <span class="n">preq</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> courses, </span><span class="si">{}</span><span class="s2"> -&gt; </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">numCourses</span><span class="p">,</span> <span class="n">preq</span><span class="p">,</span> <span class="n">out</span><span class="p">))</span>
+
+<span class="n">showResult</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">]])</span>
+<span class="n">showResult</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]])</span>
+<span class="n">showResult</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]])</span>
+<span class="n">showResult</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">]])</span>
+<span class="n">showResult</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">]])</span>
+<span class="n">showResult</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">]])</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>[0, 1, 1, 2, 0]
+[0, 0, 0, 0, 0]
+5 courses, [[1, 4], [2, 4], [3, 1], [3, 2]] -&gt; True
+[1, 1]
+[1, 1]
+2 courses, [[1, 0], [0, 1]] -&gt; False
+[0, 1]
+[0, 0]
+2 courses, [[1, 0]] -&gt; True
+[0, 1, 1, 1, 0, 1]
+[0, 0, 0, 0, 0, 0]
+6 courses, [[1, 0], [2, 1], [5, 2], [3, 0]] -&gt; True
+[0, 2, 2, 1, 0, 1]
+[0, 1, 1, 0, 0, 1]
+6 courses, [[1, 0], [2, 1], [5, 2], [3, 0], [1, 2], [2, 4]] -&gt; False
+[0, 2, 2, 0]
+[0, 0, 0, 0]
+4 courses, [[1, 0], [2, 0], [2, 3], [1, 3]] -&gt; True
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h1 id="Recursion">Recursion<a class="anchor-link" href="#Recursion">&#182;</a></h1><h3 id="Generate-valid-pairs-of-parantheses">Generate valid pairs of parantheses<a class="anchor-link" href="#Generate-valid-pairs-of-parantheses">&#182;</a></h3><p><a href="https://leetcode.com/problems/generate-parentheses">https://leetcode.com/problems/generate-parentheses</a></p>
+<p>Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.</p>
+<pre><code>Example 1:
+
+Input: n = 3
+Output: [&quot;((()))&quot;,&quot;(()())&quot;,&quot;(())()&quot;,&quot;()(())&quot;,&quot;()()()&quot;]
+</code></pre>
+<pre><code>Example 2:
+
+Input: n = 1
+Output: [&quot;()&quot;]
+</code></pre>
+<p>Constraints:</p>
+<p><code>1 &lt;= n &lt;= 8</code></p>
+<h4 id="Observations">Observations<a class="anchor-link" href="#Observations">&#182;</a></h4><p>Combinations of parentheses are generated based on previous combinations, e.g. combinations of 3 pairs are all generated based on combinations of two pairs.</p>
+<p>Pairs start with a left parenthese. Given a combination n of parentheses, we can insert another pair by removing 0,1,2...n right parentheses from the righthand side, inserting the new parentheses and putting the other ones back.</p>
+<p>Combinations can repeat, e.g.</p>
+<pre><code>()() -&gt; 1 -&gt; ()(())
+(()) -&gt; 3 -&gt; ()(())
+</code></pre>
+<h4 id="Solution">Solution<a class="anchor-link" href="#Solution">&#182;</a></h4><p>For n pairs, we generate all valid combinations from 1 to n:</p>
+<ol>
+<li>Saving the n combinations when we generate them</li>
+<li>Keeping track of combinations that repeat</li>
+</ol>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[192]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">generateParenthesis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">def</span> <span class="nf">generate_next</span><span class="p">(</span><span class="n">combo</span><span class="p">,</span> <span class="n">count</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">combo</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s1">&#39;()&#39;</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">combo</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="k">while</span> <span class="n">count</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">combo</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;)&quot;</span><span class="p">:</span>
+                    <span class="n">count</span> <span class="o">-=</span> <span class="mi">1</span>
+                <span class="n">i</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="k">return</span> <span class="n">combo</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;()&#39;</span> <span class="o">+</span> <span class="n">combo</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span>
+        
+        
+        <span class="k">def</span> <span class="nf">generate_rec</span><span class="p">(</span><span class="n">combos</span><span class="p">,</span> <span class="n">count</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">count</span> <span class="o">&gt;</span> <span class="n">n</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">combos</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">combo</span> <span class="ow">in</span> <span class="n">combos</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">count</span><span class="p">):</span>
+                    <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">generate_next</span><span class="p">(</span><span class="n">combo</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span>
+            
+            <span class="k">return</span> <span class="n">generate_rec</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+            
+        <span class="n">combos</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">]</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">generate_rec</span><span class="p">(</span><span class="n">combos</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">out</span><span class="p">))</span>
+    
+    
+<span class="nb">print</span><span class="p">(</span><span class="n">Solution</span><span class="p">()</span><span class="o">.</span><span class="n">generateParenthesis</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>[&#39;(()())()&#39;, &#39;(())()()&#39;, &#39;(())(())&#39;, &#39;((()))()&#39;, &#39;(()()())&#39;, &#39;()()()()&#39;, &#39;()((()))&#39;, &#39;()(())()&#39;, &#39;(()(()))&#39;, &#39;()()(())&#39;, &#39;((())())&#39;, &#39;()(()())&#39;, &#39;(((())))&#39;, &#39;((()()))&#39;]
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h4 id="Iterative-Solution">Iterative Solution<a class="anchor-link" href="#Iterative-Solution">&#182;</a></h4><h5 id="Observations">Observations<a class="anchor-link" href="#Observations">&#182;</a></h5><ul>
+<li>We make a choice to either place a left parenthese or a right one.</li>
+<li>Working from left to right, we can place a left parenthese any time we like, without unbalancing the parentheses.</li>
+<li>Working from left to right, we can place a right parenthese only when there are more left parentheses placed than right ones. That way we know for sure that by placing the right parenthese, we're closing a left one that has already been placed. This way we ensure that our combination will not be unbalanced.</li>
+</ul>
+<h5 id="Solution-description">Solution description<a class="anchor-link" href="#Solution-description">&#182;</a></h5><p>We generate all combinations of parentheses that do not result in an unbalanced sequence.
+We do this by iterating on previous combinations and choosing whether to:</p>
+<ul>
+<li>place a left parenthese and create a new combo</li>
+<li>place a right parenthese, provided we don't unbalance the combo</li>
+<li>save the combo, if it's complete</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[197]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">generateParenthesis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="n">combos</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">combos</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="s1">&#39;(&#39;</span><span class="p">])</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">combos</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">newCombos</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">combo</span> <span class="ow">in</span> <span class="n">combos</span><span class="p">:</span>
+                <span class="c1"># All parentheses are placed, so add combo to result</span>
+                <span class="k">if</span> <span class="n">combo</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">combo</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">combo</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+                    <span class="k">continue</span>
+                <span class="c1"># If we can place a left parenthese, we create a combo where we&#39;ve placed it</span>
+                <span class="k">if</span> <span class="n">combo</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">newCombos</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">combo</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">combo</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">combo</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;(&quot;</span><span class="p">])</span>
+                <span class="c1"># If we have more right parenteses to place than left ones, we create a combo</span>
+                <span class="c1"># with a placed right parenthese. This ensures that the combo will remain balanced</span>
+                <span class="c1"># and we won&#39;t create an out of order placement</span>
+                <span class="k">if</span> <span class="n">combo</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">combo</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">combo</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                    <span class="n">newCombos</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">combo</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">combo</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">combo</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;)&quot;</span><span class="p">])</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">combos</span><span class="p">)</span>
+            <span class="n">combos</span> <span class="o">=</span> <span class="n">newCombos</span>
+        <span class="k">return</span> <span class="n">result</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="n">Solution</span><span class="p">()</span><span class="o">.</span><span class="n">generateParenthesis</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>[[2, 3, &#39;(&#39;]]
+[[1, 3, &#39;((&#39;], [2, 2, &#39;()&#39;]]
+[[0, 3, &#39;(((&#39;], [1, 2, &#39;(()&#39;], [1, 2, &#39;()(&#39;]]
+[[0, 2, &#39;((()&#39;], [0, 2, &#39;(()(&#39;], [1, 1, &#39;(())&#39;], [0, 2, &#39;()((&#39;], [1, 1, &#39;()()&#39;]]
+[[0, 1, &#39;((())&#39;], [0, 1, &#39;(()()&#39;], [0, 1, &#39;(())(&#39;], [0, 1, &#39;()(()&#39;], [0, 1, &#39;()()(&#39;]]
+[[0, 0, &#39;((()))&#39;], [0, 0, &#39;(()())&#39;], [0, 0, &#39;(())()&#39;], [0, 0, &#39;()(())&#39;], [0, 0, &#39;()()()&#39;]]
+[&#39;((()))&#39;, &#39;(()())&#39;, &#39;(())()&#39;, &#39;()(())&#39;, &#39;()()()&#39;]
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h4 id="Iterative-Solution-using-Queue">Iterative Solution using Queue<a class="anchor-link" href="#Iterative-Solution-using-Queue">&#182;</a></h4><p>Note: Above solution is faster than this on leet code and us</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[198]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+<span class="k">class</span> <span class="nc">Solution</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">generateParenthesis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="n">combos</span> <span class="o">=</span> <span class="n">deque</span><span class="p">([])</span>
+        <span class="n">combos</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="s1">&#39;(&#39;</span><span class="p">])</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">while</span> <span class="n">combos</span><span class="p">:</span>
+            <span class="n">combo</span> <span class="o">=</span> <span class="n">combos</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+            <span class="c1"># All parentheses are placed, so add combo to result</span>
+            <span class="k">if</span> <span class="n">combo</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">combo</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">combo</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+                <span class="k">continue</span>
+            <span class="c1"># If we can place a left parenthese, we create a combo where we&#39;ve placed it</span>
+            <span class="k">if</span> <span class="n">combo</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">combos</span><span class="o">.</span><span class="n">appendleft</span><span class="p">([</span><span class="n">combo</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">combo</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">combo</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;(&quot;</span><span class="p">])</span>
+            <span class="c1"># If we have more right parenteses to place than left ones, we create a combo</span>
+            <span class="c1"># with a placed right parenthese. This ensures that the combo will remain balanced</span>
+            <span class="c1"># and we won&#39;t create an out of order placement</span>
+            <span class="k">if</span> <span class="n">combo</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">combo</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">combo</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                <span class="n">combos</span><span class="o">.</span><span class="n">appendleft</span><span class="p">([</span><span class="n">combo</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">combo</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">combo</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;)&quot;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">result</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="n">Solution</span><span class="p">()</span><span class="o">.</span><span class="n">generateParenthesis</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>[[2, 3, &#39;(&#39;]]
+[[1, 3, &#39;((&#39;], [2, 2, &#39;()&#39;]]
+[[0, 3, &#39;(((&#39;], [1, 2, &#39;(()&#39;], [1, 2, &#39;()(&#39;]]
+[[0, 2, &#39;((()&#39;], [0, 2, &#39;(()(&#39;], [1, 1, &#39;(())&#39;], [0, 2, &#39;()((&#39;], [1, 1, &#39;()()&#39;]]
+[[0, 1, &#39;((())&#39;], [0, 1, &#39;(()()&#39;], [0, 1, &#39;(())(&#39;], [0, 1, &#39;()(()&#39;], [0, 1, &#39;()()(&#39;]]
+[[0, 0, &#39;((()))&#39;], [0, 0, &#39;(()())&#39;], [0, 0, &#39;(())()&#39;], [0, 0, &#39;()(())&#39;], [0, 0, &#39;()()()&#39;]]
+[&#39;((()))&#39;, &#39;(()())&#39;, &#39;(())()&#39;, &#39;()(())&#39;, &#39;()()()&#39;]
 </pre>
 </div>
 </div>
