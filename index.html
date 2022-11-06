@@ -15222,6 +15222,122 @@ Common case: we recurse up, down, left or right and change the initial color to 
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Binary-Tree-Level-Order-Traversal">Binary Tree Level Order Traversal<a class="anchor-link" href="#Binary-Tree-Level-Order-Traversal">&#182;</a></h3><p>Given the root of a binary tree, return the level order traversal of its nodes' values. (i.e., from left to right, level by level).</p>
+<p>Example 1:
+<img src="https://assets.leetcode.com/uploads/2021/02/19/tree1.jpg" alt="" /></p>
+<pre><code>Input: root = [3,9,20,null,null,15,7]
+Output: [[3],[9,20],[15,7]]
+</code></pre>
+<p>Example 2:</p>
+<pre><code>Input: root = [1]
+Output: [[1]]
+Example 3:
+
+Input: root = []
+Output: []
+</code></pre>
+<h4 id="Observations">Observations<a class="anchor-link" href="#Observations">&#182;</a></h4><p>A binary tree is a special type of graph
+Level order traversal is a type of BFS we run on the tree</p>
+<h4 id="Solution">Solution<a class="anchor-link" href="#Solution">&#182;</a></h4><p>We use a queue to determine the levels of the tree.</p>
+<ol>
+<li>Initialize the queue with the tree root</li>
+<li>While the queue is not empty</li>
+</ol>
+<ul>
+<li>Pop the queue for a maximum number of the nodes on the current level</li>
+</ul>
+<p>E.g. on lvl 0 (root), pop a max of 2^0 nodes
+on lvl 1, pop a max of 2^1 nodes, etc.</p>
+<ul>
+<li>For each node set, add their children to the queue</li>
+<li>Add the elements to the result array</li>
+</ul>
+<ol start="3">
+<li>Return the result array</li>
+</ol>
+<h4 id="Complexity">Complexity<a class="anchor-link" href="#Complexity">&#182;</a></h4><p>Time complexity is O(n), where n is the number of nodes in the tree (we see every node)
+Space complexity is also O(n), we store every node for every level and derive outputs for it.</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+<span class="k">class</span> <span class="nc">TreeNode</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">left</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">val</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">left</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">right</span>
+        
+<span class="k">class</span> <span class="nc">Solution</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">levelOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">root</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[]</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">level</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">bfs</span> <span class="o">=</span> <span class="n">deque</span><span class="p">([</span><span class="n">root</span><span class="p">])</span>
+        <span class="k">while</span> <span class="n">bfs</span><span class="p">:</span>
+            <span class="n">lvl</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">count</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">**</span> <span class="n">level</span>
+            <span class="k">while</span> <span class="n">bfs</span> <span class="ow">and</span> <span class="n">count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">node</span> <span class="o">=</span> <span class="n">bfs</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">node</span><span class="p">:</span>
+                    <span class="n">lvl</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+                <span class="n">count</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">lvl</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">left</span><span class="p">:</span>
+                    <span class="n">bfs</span><span class="o">.</span><span class="n">appendleft</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">left</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">right</span><span class="p">:</span>
+                    <span class="n">bfs</span><span class="o">.</span><span class="n">appendleft</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">right</span><span class="p">)</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">x</span><span class="o">.</span><span class="n">val</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">lvl</span><span class="p">])</span>
+            <span class="n">level</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">out</span>
+
+<span class="n">root</span> <span class="o">=</span> <span class="n">TreeNode</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">TreeNode</span><span class="p">(</span><span class="mi">9</span><span class="p">),</span> <span class="n">TreeNode</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="n">TreeNode</span><span class="p">(</span><span class="mi">15</span><span class="p">),</span> <span class="n">TreeNode</span><span class="p">(</span><span class="mi">7</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Solution</span><span class="p">()</span><span class="o">.</span><span class="n">levelOrder</span><span class="p">(</span><span class="n">root</span><span class="p">))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>[[3], [9, 20], [15, 7]]
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h1 id="Recursion">Recursion<a class="anchor-link" href="#Recursion">&#182;</a></h1><h3 id="Generate-valid-pairs-of-parantheses">Generate valid pairs of parantheses<a class="anchor-link" href="#Generate-valid-pairs-of-parantheses">&#182;</a></h3><p><a href="https://leetcode.com/problems/generate-parentheses">https://leetcode.com/problems/generate-parentheses</a></p>
 <p>Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.</p>
 <pre><code>Example 1:
@@ -15413,7 +15529,8 @@ We do this by iterating on previous combinations and choosing whether to:</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h4 id="Iterative-Solution-using-Queue">Iterative Solution using Queue<a class="anchor-link" href="#Iterative-Solution-using-Queue">&#182;</a></h4><p>Note: Above solution is faster than this on leet code and uses less memory. Doesn't make much sense, so might have something to do with the deque implementation or internal python implementation specifics.</p>
+<h4 id="Iterative-Solution-using-Queue">Iterative Solution using Queue<a class="anchor-link" href="#Iterative-Solution-using-Queue">&#182;</a></h4><p>Note: Above solution is faster than this on leet code and uses less memory.
+Doesn't make much sense, so might have something to do with the deque implementation or internal python implementation specifics.</p>
 
 </div>
 </div>
