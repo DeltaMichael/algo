@@ -15601,6 +15601,211 @@ Doesn't make much sense, so might have something to do with the deque implementa
 
 </div>
 
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h1 id="Sorting-and-Searching">Sorting and Searching<a class="anchor-link" href="#Sorting-and-Searching">&#182;</a></h1>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Two-Sum-(Input-is-Sorted)">Two Sum (Input is Sorted)<a class="anchor-link" href="#Two-Sum-(Input-is-Sorted)">&#182;</a></h3><p><a href="https://leetcode.com/problems/two-sum-ii-input-array-is-sorted">https://leetcode.com/problems/two-sum-ii-input-array-is-sorted</a></p>
+<p>Given a 1-indexed array of integers numbers that is already sorted in non-decreasing order, find two numbers such that they add up to a specific target number. Let these two numbers be numbers[index1] and numbers[index2] where 1 &lt;= index1 &lt; index2 &lt;= numbers.length.</p>
+<p>Return the indices of the two numbers, index1 and index2, added by one as an integer array [index1, index2] of length 2.</p>
+<p>The tests are generated such that there is exactly one solution. You may not use the same element twice.</p>
+<p>Your solution must use only constant extra space.</p>
+<p>Example 1:</p>
+<pre><code>Input: numbers = [2,7,11,15], target = 9
+Output: [1,2]
+Explanation: The sum of 2 and 7 is 9. Therefore, index1 = 1, index2 = 2. We return [1, 2].
+</code></pre>
+<p>Example 2:</p>
+<pre><code>Input: numbers = [2,3,4], target = 6
+Output: [1,3]
+Explanation: The sum of 2 and 4 is 6. Therefore index1 = 1, index2 = 3. We return [1, 3].
+</code></pre>
+<p>Example 3:</p>
+<pre><code>Input: numbers = [-1,0], target = -1
+Output: [1,2]
+Explanation: The sum of -1 and 0 is -1. Therefore index1 = 1, index2 = 2. We return [1, 2].
+</code></pre>
+<p>Constraints:</p>
+<pre><code>2 &lt;= numbers.length &lt;= 3 * 104
+-1000 &lt;= numbers[i] &lt;= 1000
+numbers is sorted in non-decreasing order.
+-1000 &lt;= target &lt;= 1000
+</code></pre>
+<p>The tests are generated such that there is exactly one solution.</p>
+<h4 id="Observations">Observations<a class="anchor-link" href="#Observations">&#182;</a></h4><p>The input being sorted means we can look at numbers in increasing order from left to right.
+The input being sorted means we can look at numbers in decresing order from right to left.</p>
+<h4 id="Solution">Solution<a class="anchor-link" href="#Solution">&#182;</a></h4><p>We create a left and right pointer, initialize them to the first and last element.
+We add the numbers at the two indexes. If the sum is larger than the target, decrement the right pointer. If it is smaller than the target, increment the left pointer. Do this until we find the sum.</p>
+<h4 id="Complexity-Analysis">Complexity Analysis<a class="anchor-link" href="#Complexity-Analysis">&#182;</a></h4><p>Time - O(n), where n is the size of the input array. We see every element in the array.
+Space - O(1) extra space, we do the input processing in-place.</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">twoSum</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">numbers</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+        <span class="n">l</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">numbers</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">+</span> <span class="n">numbers</span><span class="p">[</span><span class="n">r</span><span class="p">]</span>
+        <span class="k">while</span> <span class="n">s</span> <span class="o">!=</span> <span class="n">target</span><span class="p">:</span> 
+            <span class="k">if</span> <span class="n">s</span> <span class="o">&lt;</span> <span class="n">target</span><span class="p">:</span>
+                <span class="n">l</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="n">s</span> <span class="o">&gt;</span> <span class="n">target</span><span class="p">:</span>
+                <span class="n">r</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">numbers</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">+</span> <span class="n">numbers</span><span class="p">[</span><span class="n">r</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">l</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">r</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+        
+        
+<span class="nb">print</span><span class="p">(</span><span class="n">Solution</span><span class="p">()</span><span class="o">.</span><span class="n">twoSum</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">15</span><span class="p">],</span> <span class="mi">9</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Solution</span><span class="p">()</span><span class="o">.</span><span class="n">twoSum</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="mi">6</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Solution</span><span class="p">()</span><span class="o">.</span><span class="n">twoSum</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>[1, 2]
+[1, 3]
+[1, 2]
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Meeting-Rooms-II">Meeting Rooms II<a class="anchor-link" href="#Meeting-Rooms-II">&#182;</a></h3><p>Given an array of meeting time intervals intervals where intervals[i] = [starti, endi], return the minimum number of conference rooms required.</p>
+<p>Example 1:</p>
+<pre><code>Input: intervals = [[0,30],[5,10],[15,20]]
+Output: 2
+</code></pre>
+<p>Example 2:</p>
+<pre><code>Input: intervals = [[7,10],[2,4]]
+Output: 1
+</code></pre>
+<p>Constraints:</p>
+<pre><code>1 &lt;= intervals.length &lt;= 104
+0 &lt;= starti &lt; endi &lt;= 106
+</code></pre>
+<h4 id="Observations">Observations<a class="anchor-link" href="#Observations">&#182;</a></h4><p>Meetings start in order of the start time.
+Once a meeting starts, if no room is available, a new one should be allocated.
+If a room is available from a previous meeting, it should be used instead.
+We can find out if a room is available by keeping track of the lowest end time.
+If the start time of the new meeting is larger than the lowest end time, we can take the room. If not, a new room should be allocated.</p>
+<h4 id="Solution">Solution<a class="anchor-link" href="#Solution">&#182;</a></h4><ol>
+<li>Sort the meetings by start time</li>
+<li>Use a min heap to track the lowest end time</li>
+<li>For every meeting time, compare the heap top to the next start time<ul>
+<li>if top is lower, then there is a room available, so pop the heap and push the new end time on it</li>
+<li>if top is higher, then there is no room available, so increment the room count</li>
+</ul>
+</li>
+</ol>
+<h4 id="Complexity-analysis">Complexity analysis<a class="anchor-link" href="#Complexity-analysis">&#182;</a></h4><p>Time Complexity - We will push an element to the heap for every interval. We see every element and push it to the heap. We also pop them occasionally, so the worst case is we will push and pop every element of the input. Pushes and pops take O(log n) time. Runtime complexity is <code>O(n*log n)</code></p>
+<p>Space complexity - In the worst case, we'll just be pushing elements on the heap, e.g. all start times overalp with an interval and all end times are larger than the end of the first interval. In this case, we'll store the whole input in the heap, so space complexity is O(n)</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+<span class="kn">from</span> <span class="nn">heapq</span> <span class="kn">import</span> <span class="n">heappush</span><span class="p">,</span> <span class="n">heappop</span>
+
+<span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">minMeetingRooms</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">intervals</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">intervals</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+        <span class="n">rooms</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">interval</span> <span class="ow">in</span> <span class="n">intervals</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">end</span> <span class="ow">and</span> <span class="n">end</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">interval</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                <span class="n">heappop</span><span class="p">(</span><span class="n">end</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">rooms</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">heappush</span><span class="p">(</span><span class="n">end</span><span class="p">,</span> <span class="n">interval</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">rooms</span>
+    
+    
+<span class="nb">print</span><span class="p">(</span><span class="n">Solution</span><span class="p">()</span><span class="o">.</span><span class="n">minMeetingRooms</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span><span class="mi">20</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="p">]]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Solution</span><span class="p">()</span><span class="o">.</span><span class="n">minMeetingRooms</span><span class="p">([[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">]]))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>2
+1
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
