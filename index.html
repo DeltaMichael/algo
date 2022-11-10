@@ -14606,7 +14606,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Arrays">Arrays<a class="anchor-link" href="#Arrays">&#182;</a></h1>
+<h1 id="Arrays-and-Strings">Arrays and Strings<a class="anchor-link" href="#Arrays-and-Strings">&#182;</a></h1>
 </div>
 </div>
 </div>
@@ -14645,12 +14645,12 @@ Only one valid answer exists.
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[62]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
@@ -14681,6 +14681,74 @@ Only one valid answer exists.
 </div>
 </div>
 
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="First-Unique-Character-in-a-String">First Unique Character in a String<a class="anchor-link" href="#First-Unique-Character-in-a-String">&#182;</a></h3><p>Given a string s, find the first non-repeating character in it and return its index. If it does not exist, return -1.</p>
+<p>Example 1:</p>
+<pre><code>Input: s = &quot;leetcode&quot;
+Output: 0
+</code></pre>
+<p>Example 2:</p>
+<pre><code>Input: s = &quot;loveleetcode&quot;
+Output: 2
+</code></pre>
+<p>Example 3:</p>
+<pre><code>Input: s = &quot;aabb&quot;
+Output: -1
+</code></pre>
+<p>Constraints:</p>
+<pre><code>1 &lt;= s.length &lt;= 105
+s consists of only lowercase English letters.
+</code></pre>
+<h4 id="Observations">Observations<a class="anchor-link" href="#Observations">&#182;</a></h4><p>We can keep track of elements we've seen and elements we've seen twice by using sets.
+We should also keep track of the min index that we haven't seen somehow.</p>
+<h4 id="Solution">Solution<a class="anchor-link" href="#Solution">&#182;</a></h4><p>We iterate the array and add the index of each element to a dict the first time we see it.
+If we have seen the element once, we add it to a set of seen elements.
+If we see the element a second, third, etc. time, we add it to a list of elements we've seen again. We take the diff of the two sets.</p>
+<p>For each element in the remaining set, get the min index by using the dict.</p>
+<h4 id="Complexity">Complexity<a class="anchor-link" href="#Complexity">&#182;</a></h4><p>Time - O(n), we see every element
+Space - O(m), where m is the set of unique elements. We store unique elements in a set.</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[58]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">firstUniqChar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">seen_twice</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="n">seen</span> <span class="o">=</span> <span class="p">{}</span>
+        
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">c</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
+                <span class="n">seen</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">seen_twice</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+                
+        <span class="n">unique</span> <span class="o">=</span> <span class="p">[</span><span class="n">seen</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">seen</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">seen_twice</span><span class="p">]</span>
+        <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">unique</span><span class="p">)</span> <span class="k">if</span> <span class="n">unique</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
+        
+<span class="nb">print</span><span class="p">(</span><span class="n">Solution</span><span class="p">()</span><span class="o">.</span><span class="n">firstUniqChar</span><span class="p">(</span><span class="s2">&quot;leetcode&quot;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Solution</span><span class="p">()</span><span class="o">.</span><span class="n">firstUniqChar</span><span class="p">(</span><span class="s2">&quot;loveleetcode&quot;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Solution</span><span class="p">()</span><span class="o">.</span><span class="n">firstUniqChar</span><span class="p">(</span><span class="s2">&quot;aabb&quot;</span><span class="p">))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
 <div class="jp-Cell-outputWrapper">
 <div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
 </div>
@@ -14693,9 +14761,105 @@ Only one valid answer exists.
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>[2, 3, 7, 11, 15]: nums[1] + nums[3] = 14
-[3, 2, 4]: nums[1] + nums[2] = 6
-[3, 3]: nums[0] + nums[1] = 6
+<pre>0
+2
+-1
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Trapping-Rain-Water">Trapping Rain Water<a class="anchor-link" href="#Trapping-Rain-Water">&#182;</a></h3><p>Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it can trap after raining.</p>
+<p>Example 1:
+<img src="https://assets.leetcode.com/uploads/2018/10/22/rainwatertrap.png" alt="" /></p>
+<pre><code>Input: height = [0,1,0,2,1,0,1,3,2,1,2,1]
+Output: 6
+Explanation: The above elevation map (black section) is represented by array [0,1,0,2,1,0,1,3,2,1,2,1]. In this case, 6 units of rain water (blue section) are being trapped.
+</code></pre>
+<p>Example 2:</p>
+<pre><code>Input: height = [4,2,0,3,2,5]
+Output: 9
+</code></pre>
+<p>Constraints:</p>
+<pre><code>n == height.length
+1 &lt;= n &lt;= 2 * 104
+0 &lt;= height[i] &lt;= 105
+</code></pre>
+<h4 id="Observations">Observations<a class="anchor-link" href="#Observations">&#182;</a></h4><p><a href="https://www.youtube.com/watch?v=C8UjlJZsHBw&amp;t=1300s">https://www.youtube.com/watch?v=C8UjlJZsHBw&amp;t=1300s</a></p>
+<ol>
+<li>We need at least 3 blocks to trap water</li>
+<li>Blocks in ascending and descending order cannot trap water</li>
+<li>The water level for a block is determined by min(max(left_height), max(right_height)) - block_height</li>
+</ol>
+<h4 id="Solution">Solution<a class="anchor-link" href="#Solution">&#182;</a></h4><p>We calculate the min(max(left_height), max(right_height)) value for each block. We then iterate over each block and calculate the water it will hold.</p>
+<h4 id="Complexity">Complexity<a class="anchor-link" href="#Complexity">&#182;</a></h4><p>Time - O(n), we see every element in the array several times.
+Space - O(n), we create left and right max arrays</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[59]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+<span class="kn">from</span> <span class="nn">queue</span> <span class="kn">import</span> <span class="n">deque</span>
+<span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">trap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">height</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">max_left</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">max_right</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">left</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">right</span> <span class="o">=</span> <span class="n">deque</span><span class="p">([])</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">height</span><span class="p">)):</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_left</span><span class="p">,</span> <span class="n">height</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
+            <span class="n">left</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+            <span class="n">max_left</span> <span class="o">=</span> <span class="n">m</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">height</span><span class="p">)</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_right</span><span class="p">,</span> <span class="n">height</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span> <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">height</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span>
+            <span class="n">right</span><span class="o">.</span><span class="n">appendleft</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+            <span class="n">max_right</span> <span class="o">=</span> <span class="n">m</span>
+        <span class="n">right</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">right</span><span class="p">)</span>
+        <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">height</span><span class="p">)):</span>
+            <span class="n">total</span> <span class="o">+=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">left</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">right</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">-</span> <span class="n">height</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">total</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Solution</span><span class="p">()</span><span class="o">.</span><span class="n">trap</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Solution</span><span class="p">()</span><span class="o">.</span><span class="n">trap</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">]))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>6
+9
 </pre>
 </div>
 </div>
@@ -14768,12 +14932,12 @@ Common case:
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[63]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
@@ -14816,28 +14980,6 @@ Common case:
      </div>
 </div>
 </div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>42
-23
-</pre>
-</div>
-</div>
-
-</div>
-
 </div>
 
 </div>
@@ -14883,12 +15025,12 @@ grid[i][j] is '0' or '1'.
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[64]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
@@ -14935,28 +15077,6 @@ grid[i][j] is '0' or '1'.
      </div>
 </div>
 </div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>[[&#39;-1&#39;, &#39;-1&#39;, &#39;0&#39;, &#39;0&#39;, &#39;0&#39;], [&#39;-1&#39;, &#39;-1&#39;, &#39;0&#39;, &#39;0&#39;, &#39;0&#39;], [&#39;0&#39;, &#39;0&#39;, &#39;-1&#39;, &#39;0&#39;, &#39;0&#39;], [&#39;0&#39;, &#39;0&#39;, &#39;0&#39;, &#39;-1&#39;, &#39;-1&#39;]]
-3
-</pre>
-</div>
-</div>
-
-</div>
-
 </div>
 
 </div>
@@ -15013,12 +15133,12 @@ Space complexity is O(N), because we store the children and in-degrees for every
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[65]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
@@ -15069,44 +15189,6 @@ Space complexity is O(N), because we store the children and in-degrees for every
 </div>
 </div>
 
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>[0, 1, 1, 2, 0]
-[0, 0, 0, 0, 0]
-5 courses, [[1, 4], [2, 4], [3, 1], [3, 2]] -&gt; True
-[1, 1]
-[1, 1]
-2 courses, [[1, 0], [0, 1]] -&gt; False
-[0, 1]
-[0, 0]
-2 courses, [[1, 0]] -&gt; True
-[0, 1, 1, 1, 0, 1]
-[0, 0, 0, 0, 0, 0]
-6 courses, [[1, 0], [2, 1], [5, 2], [3, 0]] -&gt; True
-[0, 2, 2, 1, 0, 1]
-[0, 1, 1, 0, 0, 1]
-6 courses, [[1, 0], [2, 1], [5, 2], [3, 0], [1, 2], [2, 4]] -&gt; False
-[0, 2, 2, 0]
-[0, 0, 0, 0]
-4 courses, [[1, 0], [2, 0], [2, 3], [1, 3]] -&gt; True
-</pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
 </div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
@@ -15148,12 +15230,12 @@ Common case: we recurse up, down, left or right and change the initial color to 
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
@@ -15191,28 +15273,6 @@ Common case: we recurse up, down, left or right and change the initial color to 
      </div>
 </div>
 </div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>[[2, 2, 2], [2, 2, 0], [2, 0, 1]]
-[[0, 0, 0], [0, 0, 0], [0, 0, 0]]
-</pre>
-</div>
-</div>
-
-</div>
-
 </div>
 
 </div>
@@ -15261,12 +15321,12 @@ Space complexity is also O(n), we store every node for every level and derive ou
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
@@ -15310,27 +15370,6 @@ Space complexity is also O(n), we store every node for every level and derive ou
 </div>
 </div>
 
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>[[3], [9, 20], [15, 7]]
-</pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
 </div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
@@ -15367,12 +15406,12 @@ Output: [&quot;()&quot;]
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[192]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
@@ -15411,27 +15450,6 @@ Output: [&quot;()&quot;]
 </div>
 </div>
 
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>[&#39;(()())()&#39;, &#39;(())()()&#39;, &#39;(())(())&#39;, &#39;((()))()&#39;, &#39;(()()())&#39;, &#39;()()()()&#39;, &#39;()((()))&#39;, &#39;()(())()&#39;, &#39;(()(()))&#39;, &#39;()()(())&#39;, &#39;((())())&#39;, &#39;()(()())&#39;, &#39;(((())))&#39;, &#39;((()()))&#39;]
-</pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
 </div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
@@ -15455,12 +15473,12 @@ We do this by iterating on previous combinations and choosing whether to:</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[197]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -15495,33 +15513,6 @@ We do this by iterating on previous combinations and choosing whether to:</p>
 </div>
 </div>
 
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>[[2, 3, &#39;(&#39;]]
-[[1, 3, &#39;((&#39;], [2, 2, &#39;()&#39;]]
-[[0, 3, &#39;(((&#39;], [1, 2, &#39;(()&#39;], [1, 2, &#39;()(&#39;]]
-[[0, 2, &#39;((()&#39;], [0, 2, &#39;(()(&#39;], [1, 1, &#39;(())&#39;], [0, 2, &#39;()((&#39;], [1, 1, &#39;()()&#39;]]
-[[0, 1, &#39;((())&#39;], [0, 1, &#39;(()()&#39;], [0, 1, &#39;(())(&#39;], [0, 1, &#39;()(()&#39;], [0, 1, &#39;()()(&#39;]]
-[[0, 0, &#39;((()))&#39;], [0, 0, &#39;(()())&#39;], [0, 0, &#39;(())()&#39;], [0, 0, &#39;()(())&#39;], [0, 0, &#39;()()()&#39;]]
-[&#39;((()))&#39;, &#39;(()())&#39;, &#39;(())()&#39;, &#39;()(())&#39;, &#39;()()()&#39;]
-</pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
 </div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
@@ -15535,12 +15526,12 @@ Doesn't make much sense, so might have something to do with the deque implementa
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[198]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
@@ -15572,33 +15563,6 @@ Doesn't make much sense, so might have something to do with the deque implementa
      </div>
 </div>
 </div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>[[2, 3, &#39;(&#39;]]
-[[1, 3, &#39;((&#39;], [2, 2, &#39;()&#39;]]
-[[0, 3, &#39;(((&#39;], [1, 2, &#39;(()&#39;], [1, 2, &#39;()(&#39;]]
-[[0, 2, &#39;((()&#39;], [0, 2, &#39;(()(&#39;], [1, 1, &#39;(())&#39;], [0, 2, &#39;()((&#39;], [1, 1, &#39;()()&#39;]]
-[[0, 1, &#39;((())&#39;], [0, 1, &#39;(()()&#39;], [0, 1, &#39;(())(&#39;], [0, 1, &#39;()(()&#39;], [0, 1, &#39;()()(&#39;]]
-[[0, 0, &#39;((()))&#39;], [0, 0, &#39;(()())&#39;], [0, 0, &#39;(())()&#39;], [0, 0, &#39;()(())&#39;], [0, 0, &#39;()()()&#39;]]
-[&#39;((()))&#39;, &#39;(()())&#39;, &#39;(())()&#39;, &#39;()(())&#39;, &#39;()()()&#39;]
-</pre>
-</div>
-</div>
-
-</div>
-
 </div>
 
 </div>
@@ -15656,12 +15620,12 @@ Space - O(1) extra space, we do the input processing in-place.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -15685,29 +15649,6 @@ Space - O(1) extra space, we do the input processing in-place.</p>
      </div>
 </div>
 </div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>[1, 2]
-[1, 3]
-[1, 2]
-</pre>
-</div>
-</div>
-
-</div>
-
 </div>
 
 </div>
@@ -15750,12 +15691,12 @@ If the start time of the new meeting is larger than the lowest end time, we can 
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
@@ -15784,6 +15725,244 @@ If the start time of the new meeting is larger than the lowest end time, we can 
 </div>
 </div>
 
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h1 id="Linked-Lists">Linked Lists<a class="anchor-link" href="#Linked-Lists">&#182;</a></h1><h3 id="Merge-Two-Sorted-Lists">Merge Two Sorted Lists<a class="anchor-link" href="#Merge-Two-Sorted-Lists">&#182;</a></h3><p>You are given the heads of two sorted linked lists list1 and list2.</p>
+<p>Merge the two lists in a one sorted list. The list should be made by splicing together the nodes of the first two lists.</p>
+<p>Return the head of the merged linked list.</p>
+<p>Example 1:</p>
+<p><img src="https://assets.leetcode.com/uploads/2020/10/03/merge_ex1.jpg" alt="" /></p>
+<pre><code>Input: list1 = [1,2,4], list2 = [1,3,4]
+Output: [1,1,2,3,4,4]
+</code></pre>
+<p>Example 2:</p>
+<pre><code>Input: list1 = [], list2 = []
+Output: []
+</code></pre>
+<p>Example 3:</p>
+<pre><code>Input: list1 = [], list2 = [0]
+Output: [0]
+</code></pre>
+<p>Constraints:</p>
+<pre><code>The number of nodes in both lists is in the range [0, 50].
+-100 &lt;= Node.val &lt;= 100
+Both list1 and list2 are sorted in non-decreasing order.
+</code></pre>
+<h4 id="Observations">Observations<a class="anchor-link" href="#Observations">&#182;</a></h4><p>If both lists are sorted, we can easily figure out the correct order by comparison.</p>
+<h4 id="Solution">Solution<a class="anchor-link" href="#Solution">&#182;</a></h4><p>We iterate over both lists, comparing values. For example, if a value in the first list is smaller than a value in the second list, we &quot;pluck&quot; it from the first list (set next to null and add it to the output list tail). We do this until one list runs out of values.</p>
+<h4 id="Complexity-Analysis">Complexity Analysis<a class="anchor-link" href="#Complexity-Analysis">&#182;</a></h4><p>Time - O(n), where n is the length of the shorter list. We go through elements on both lists until one of them is exhausted.</p>
+<p>Space - O(1), we re-use nodes for the output</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+
+<span class="k">class</span> <span class="nc">ListNode</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">next</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">val</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="nb">next</span>
+        
+<span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">mergeTwoLists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">list1</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ListNode</span><span class="p">],</span> <span class="n">list2</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ListNode</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ListNode</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">list1</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">list2</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">list1</span>
+        <span class="k">if</span> <span class="n">list2</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">list1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">list2</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">list1</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">list2</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="n">out</span><span class="p">,</span> <span class="n">first</span><span class="p">,</span> <span class="n">second</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">list1</span><span class="p">,</span> <span class="n">list2</span>
+        <span class="k">if</span> <span class="n">list1</span><span class="o">.</span><span class="n">val</span> <span class="o">&lt;=</span> <span class="n">list2</span><span class="o">.</span><span class="n">val</span><span class="p">:</span>
+            <span class="n">out</span><span class="p">,</span> <span class="n">first</span> <span class="o">=</span> <span class="n">list1</span><span class="p">,</span> <span class="n">list1</span><span class="o">.</span><span class="n">next</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">out</span><span class="p">,</span> <span class="n">second</span> <span class="o">=</span> <span class="n">list2</span><span class="p">,</span> <span class="n">list2</span><span class="o">.</span><span class="n">next</span>
+        <span class="n">first_out</span> <span class="o">=</span> <span class="n">out</span>
+        <span class="k">while</span> <span class="n">first</span> <span class="ow">and</span> <span class="n">second</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">first</span><span class="o">.</span><span class="n">val</span> <span class="o">&lt;=</span> <span class="n">second</span><span class="o">.</span><span class="n">val</span><span class="p">:</span>
+                <span class="n">n</span> <span class="o">=</span> <span class="n">first</span><span class="o">.</span><span class="n">next</span>
+                <span class="n">first</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="n">out</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">first</span>
+                <span class="n">first</span> <span class="o">=</span> <span class="n">n</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">n</span> <span class="o">=</span> <span class="n">second</span><span class="o">.</span><span class="n">next</span>
+                <span class="n">second</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="n">out</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">second</span>
+                <span class="n">second</span> <span class="o">=</span> <span class="n">n</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">next</span>
+            
+        <span class="k">if</span> <span class="n">first</span><span class="p">:</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">first</span>
+        <span class="k">elif</span> <span class="n">second</span><span class="p">:</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">second</span>
+            
+        <span class="k">return</span> <span class="n">first_out</span>
+            
+                
+
+<span class="n">first</span> <span class="o">=</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">4</span><span class="p">)))</span>
+<span class="n">second</span> <span class="o">=</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">4</span><span class="p">)))</span>
+<span class="n">out</span> <span class="o">=</span> <span class="n">Solution</span><span class="p">()</span><span class="o">.</span><span class="n">mergeTwoLists</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">second</span><span class="p">)</span>
+<span class="k">while</span> <span class="n">out</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">val</span><span class="p">)</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">next</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Reverse-Linked-List">Reverse Linked List<a class="anchor-link" href="#Reverse-Linked-List">&#182;</a></h3><p>Given the head of a singly linked list, reverse the list, and return the reversed list.</p>
+<p>Example 1:
+<img src="https://assets.leetcode.com/uploads/2021/02/19/rev1ex1.jpg" alt="" /></p>
+<p>Input: head = [1,2,3,4,5]
+Output: [5,4,3,2,1]</p>
+<p>Example 2:
+<img src="https://assets.leetcode.com/uploads/2021/02/19/rev1ex2.jpg" alt="" /></p>
+<pre><code>Input: head = [1,2]
+Output: [2,1]
+</code></pre>
+<p>Example 3:</p>
+<pre><code>Input: head = []
+Output: []
+</code></pre>
+<p>Constraints:</p>
+<pre><code>The number of nodes in the list is the range [0, 5000].
+-5000 &lt;= Node.val &lt;= 5000
+</code></pre>
+<h4 id="Observations">Observations<a class="anchor-link" href="#Observations">&#182;</a></h4><p>We can traverse the list from left to right only. To reverse the list, we have to see every elelement, so the best we can do is O(n).</p>
+<h4 id="Solution">Solution<a class="anchor-link" href="#Solution">&#182;</a></h4><p>We traverse the list from left to right, keeping three pointers - current, previous and next. For each node, we save the next pointer, point the next pointer to the previous and then advance along the list.</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+<span class="k">class</span> <span class="nc">ListNode</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">next</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">val</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="nb">next</span>
+<span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">reverseList</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">head</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ListNode</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ListNode</span><span class="p">]:</span>
+        <span class="n">current</span> <span class="o">=</span> <span class="n">head</span>
+        <span class="n">prev</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">while</span> <span class="n">current</span><span class="p">:</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="n">current</span><span class="o">.</span><span class="n">next</span>
+            <span class="n">current</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">prev</span>
+            <span class="n">prev</span> <span class="o">=</span> <span class="n">current</span>
+            <span class="n">current</span> <span class="o">=</span> <span class="n">n</span>
+        <span class="k">return</span> <span class="n">prev</span>
+        
+<span class="n">l</span> <span class="o">=</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">6</span><span class="p">))))))</span>
+<span class="n">out</span> <span class="o">=</span> <span class="n">Solution</span><span class="p">()</span><span class="o">.</span><span class="n">reverseList</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+<span class="k">while</span> <span class="n">out</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">val</span><span class="p">)</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">next</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h4 id="Recursive-Solution">Recursive Solution<a class="anchor-link" href="#Recursive-Solution">&#182;</a></h4><p>Base case is when the next node is null. On the recursion exit, we reverse the node order by doing the following.</p>
+<ol>
+<li>We exited at E, pass E up the call stack</li>
+<li>We're at D now. Set D-&gt;next-&gt;next (which is E-&gt;next) to D</li>
+<li>Set D-&gt;next to null (we're reversing the list and D is the tail node)</li>
+<li>We're at C now. Set C-&gt;next-&gt;next (which is D-&gt;next) to C</li>
+<li>Set C-&gt;next to null (we're reversing the list and C is the tail node)</li>
+<li>etc...</li>
+</ol>
+<p><img src="img/reverse-linked-list-rec.png" alt="" /></p>
+<h4 id="Complexity-of-Recursive-Solution">Complexity of Recursive Solution<a class="anchor-link" href="#Complexity-of-Recursive-Solution">&#182;</a></h4><p>Runtime is O(n), we see every element twice.
+Space is O(n) - once we reach the base case, all nodes are pushed on the call stack</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[25]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+<span class="k">class</span> <span class="nc">ListNode</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">next</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">val</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="nb">next</span>
+<span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">reverseList</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">head</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ListNode</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ListNode</span><span class="p">]:</span>
+        <span class="k">def</span> <span class="nf">reverse</span><span class="p">(</span><span class="n">head</span><span class="p">):</span>
+            <span class="c1"># Base case, if the next node is null, return the current one</span>
+            <span class="k">if</span> <span class="n">head</span><span class="o">.</span><span class="n">next</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">head</span>
+            <span class="c1"># Save the return value</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="n">head</span><span class="o">.</span><span class="n">next</span><span class="p">)</span>
+            <span class="c1"># Get the last node whose next pointer is pointing to null</span>
+            <span class="c1"># and set it to the current node</span>
+            <span class="n">head</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">head</span>
+            <span class="c1"># Set the current next pointer to point to null</span>
+            <span class="n">head</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">return</span> <span class="n">out</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">head</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="k">return</span> <span class="n">reverse</span><span class="p">(</span><span class="n">head</span><span class="p">)</span>
+
+            
+            
+        <span class="n">reverse</span><span class="p">(</span><span class="n">head</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">out</span>
+        
+<span class="n">l</span> <span class="o">=</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">6</span><span class="p">))))))</span>
+<span class="n">out</span> <span class="o">=</span> <span class="n">Solution</span><span class="p">()</span><span class="o">.</span><span class="n">reverseList</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+<span class="k">while</span> <span class="n">out</span><span class="p">:</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">next</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
 <div class="jp-Cell-outputWrapper">
 <div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
 </div>
@@ -15796,8 +15975,21 @@ If the start time of the new meeting is larger than the lowest end time, we can 
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>2
+<pre>6
+5
+6
+6
+4
+5
+6
+3
+4
+6
+2
+3
+6
 1
+2
 </pre>
 </div>
 </div>
@@ -15806,15 +15998,94 @@ If the start time of the new meeting is larger than the lowest end time, we can 
 
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Linked-List-Cycle">Linked List Cycle<a class="anchor-link" href="#Linked-List-Cycle">&#182;</a></h3><p><a href="https://leetcode.com/problems/linked-list-cycle">https://leetcode.com/problems/linked-list-cycle</a><br />
+<a href="https://leetcode.com/problems/linked-list-cycle-ii/">https://leetcode.com/problems/linked-list-cycle-ii/</a></p>
+<p>Given head, the head of a linked list, determine if the linked list has a cycle in it.</p>
+<p>There is a cycle in a linked list if there is some node in the list that can be reached again by continuously following the next pointer. Internally, pos is used to denote the index of the node that tail's next pointer is connected to. Note that pos is not passed as a parameter.</p>
+<p>Return true if there is a cycle in the linked list. Otherwise, return false.</p>
+<p>Example 1:</p>
+<p><img src="https://assets.leetcode.com/uploads/2018/12/07/circularlinkedlist.png" alt="" /></p>
+<pre><code>Input: head = [3,2,0,-4], pos = 1
+Output: true
+Explanation: There is a cycle in the linked list, where the tail connects to the 1st node (0-indexed).
+</code></pre>
+<p>Example 2:</p>
+<p><img src="https://assets.leetcode.com/uploads/2018/12/07/circularlinkedlist_test2.png" alt="" /></p>
+<pre><code>Input: head = [1,2], pos = 0
+Output: true
+Explanation: There is a cycle in the linked list, where the tail connects to the 0th node.
+</code></pre>
+<p>Example 3:
+<img src="https://assets.leetcode.com/uploads/2018/12/07/circularlinkedlist_test3.png" alt="" /></p>
+<pre><code>Input: head = [1], pos = -1
+Output: false
+Explanation: There is no cycle in the linked list.
+</code></pre>
+<p>Constraints:</p>
+<pre><code>The number of the nodes in the list is in the range [0, 104].
+-105 &lt;= Node.val &lt;= 105
+pos is -1 or a valid index in the linked-list.
+</code></pre>
+<p>Follow up: Can you solve it using O(1) (i.e. constant) memory?<br />
+Follow up: Can you solve it using O(1) (i.e. constant) memory without modifying the linked list?</p>
+<h4 id="Observations">Observations<a class="anchor-link" href="#Observations">&#182;</a></h4><p>We have to keep track of what we've seen.
+If we see a node twice somehow, this means there's a cycle</p>
+<h4 id="Solution">Solution<a class="anchor-link" href="#Solution">&#182;</a></h4><p>We keep a set of seen nodes and check against it while iterating the list.</p>
+<h5 id="Complexity">Complexity<a class="anchor-link" href="#Complexity">&#182;</a></h5><p>Time - O(n), we see every node in the list
+Space - O(n) additional space, we store every node in the list in a set</p>
+<h4 id="Optimized-Solution">Optimized Solution<a class="anchor-link" href="#Optimized-Solution">&#182;</a></h4><p>Instead of using a set, we can just set the value of the nodes we've seen ot something that's outside the range of possible values. If we see that value again, it means we have a cycle</p>
+<h5 id="Complexity">Complexity<a class="anchor-link" href="#Complexity">&#182;</a></h5><p>Time - O(n), we see every node in the list
+Space - O(1), we don't store anything additional</p>
+<h4 id="Solution-that-does-not-modify-the-linked-list">Solution that does not modify the linked list<a class="anchor-link" href="#Solution-that-does-not-modify-the-linked-list">&#182;</a></h4><p>Imagine we had the following list:</p>
+<p>We can use two pointers to traverse the list. One will see every element, the other will see every second element. If there is a cycle, those two pointers will eventuall meet.</p>
+<p>Example:</p>
+<p>0-&gt;1-&gt;2-&gt;3-&gt;4-&gt;5 with a cycle from 5 to 2.</p>
+<p>Slow: <code>012345234523452345</code>
+Fast: <code>024242424242424242</code></p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[67]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">ListNode</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">n</span>
+
+<span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">hasCycle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">head</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ListNode</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="n">seen</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">while</span> <span class="n">head</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">head</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">True</span>
+            <span class="n">seen</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">head</span><span class="p">)</span>
+            <span class="n">head</span> <span class="o">=</span> <span class="n">head</span><span class="o">.</span><span class="n">next</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+<span class="n">head</span> <span class="o">=</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">tail</span> <span class="o">=</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">cycled</span> <span class="o">=</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">tail</span><span class="p">))))</span>
+<span class="n">head</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">cycled</span>
+<span class="n">tail</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">cycled</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">Solution</span><span class="p">()</span><span class="o">.</span><span class="n">hasCycle</span><span class="p">(</span><span class="n">head</span><span class="p">))</span>
+
+<span class="n">head</span> <span class="o">=</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">3</span><span class="p">))))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Solution</span><span class="p">()</span><span class="o">.</span><span class="n">hasCycle</span><span class="p">(</span><span class="n">head</span><span class="p">))</span>
 </pre></div>
 
      </div>
@@ -15822,6 +16093,166 @@ If the start time of the new meeting is larger than the lowest end time, we can 
 </div>
 </div>
 
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>True
+False
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[68]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">ListNode</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">n</span>
+
+<span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">hasCycle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">head</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ListNode</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="n">litmus</span> <span class="o">=</span> <span class="s1">&#39;~&#39;</span>
+        <span class="k">while</span> <span class="n">head</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">head</span><span class="o">.</span><span class="n">val</span> <span class="o">==</span> <span class="n">litmus</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">True</span>
+            <span class="n">head</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">litmus</span>
+            <span class="n">head</span> <span class="o">=</span> <span class="n">head</span><span class="o">.</span><span class="n">next</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+<span class="n">head</span> <span class="o">=</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">tail</span> <span class="o">=</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">cycled</span> <span class="o">=</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">tail</span><span class="p">))))</span>
+<span class="n">head</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">cycled</span>
+<span class="n">tail</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">cycled</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">Solution</span><span class="p">()</span><span class="o">.</span><span class="n">hasCycle</span><span class="p">(</span><span class="n">head</span><span class="p">))</span>
+
+<span class="n">head</span> <span class="o">=</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">3</span><span class="p">))))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Solution</span><span class="p">()</span><span class="o">.</span><span class="n">hasCycle</span><span class="p">(</span><span class="n">head</span><span class="p">))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>True
+False
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[71]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">ListNode</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">n</span>
+
+<span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">hasCycle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">head</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ListNode</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="n">fast</span> <span class="o">=</span> <span class="n">slow</span> <span class="o">=</span> <span class="n">head</span>
+        <span class="k">while</span> <span class="n">slow</span> <span class="ow">and</span> <span class="n">slow</span><span class="o">.</span><span class="n">next</span><span class="p">:</span>
+            <span class="n">fast</span> <span class="o">=</span> <span class="n">fast</span><span class="o">.</span><span class="n">next</span>
+            <span class="n">slow</span> <span class="o">=</span> <span class="n">slow</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">next</span>
+            <span class="k">if</span> <span class="n">fast</span> <span class="o">==</span> <span class="n">slow</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+<span class="n">head</span> <span class="o">=</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">tail</span> <span class="o">=</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">cycled</span> <span class="o">=</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">tail</span><span class="p">))))</span>
+<span class="n">head</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">cycled</span>
+<span class="n">tail</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">cycled</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">Solution</span><span class="p">()</span><span class="o">.</span><span class="n">hasCycle</span><span class="p">(</span><span class="n">head</span><span class="p">))</span>
+
+<span class="n">head</span> <span class="o">=</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">3</span><span class="p">))))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Solution</span><span class="p">()</span><span class="o">.</span><span class="n">hasCycle</span><span class="p">(</span><span class="n">head</span><span class="p">))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>True
+False
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h4 id="Solution-that-returns-the-loop-origin">Solution that returns the loop origin<a class="anchor-link" href="#Solution-that-returns-the-loop-origin">&#182;</a></h4><p>Floyd's Tortoise and Hare Algorithm - <a href="https://www.youtube.com/watch?v=-YiQZi3mLq0">https://www.youtube.com/watch?v=-YiQZi3mLq0</a></p>
+<p>We find the intersection point as we did in the previous solution.
+After we find the intersection point, we create two pointers - one to the head of the list and one to the intersection point. We run these pointers at equal speeds until they converge. We return the point where they converge.</p>
+
+</div>
+</div>
+</div>
 </div>
 </body>
 
