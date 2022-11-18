@@ -15089,12 +15089,12 @@ Space complexity is O(N), because we store the children and in-degrees for every
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
@@ -15105,11 +15105,11 @@ Space complexity is O(N), because we store the children and in-degrees for every
         <span class="n">indegrees</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numCourses</span><span class="p">)]</span>
         <span class="n">bfs</span> <span class="o">=</span> <span class="n">deque</span><span class="p">([])</span>
         <span class="c1"># Create the graph without isolated single nodes</span>
-        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">prerequisites</span><span class="p">:</span>
-            <span class="n">children</span> <span class="o">=</span> <span class="n">graph</span><span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
-            <span class="n">children</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">preq</span><span class="p">,</span> <span class="n">course</span> <span class="ow">in</span> <span class="n">prerequisites</span><span class="p">:</span>
+            <span class="n">children</span> <span class="o">=</span> <span class="n">graph</span><span class="p">[</span><span class="n">course</span><span class="p">]</span>
+            <span class="n">children</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">preq</span><span class="p">)</span>
             
-            <span class="n">indegrees</span><span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">indegrees</span><span class="p">[</span><span class="n">preq</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
         
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">d</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">indegrees</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">d</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -15143,6 +15143,44 @@ Space complexity is O(N), because we store the children and in-degrees for every
      </div>
 </div>
 </div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>[0, 1, 1, 2, 0]
+[0, 0, 0, 0, 0]
+5 courses, [[1, 4], [2, 4], [3, 1], [3, 2]] -&gt; True
+[1, 1]
+[1, 1]
+2 courses, [[1, 0], [0, 1]] -&gt; False
+[0, 1]
+[0, 0]
+2 courses, [[1, 0]] -&gt; True
+[0, 1, 1, 1, 0, 1]
+[0, 0, 0, 0, 0, 0]
+6 courses, [[1, 0], [2, 1], [5, 2], [3, 0]] -&gt; True
+[0, 2, 2, 1, 0, 1]
+[0, 1, 1, 0, 0, 1]
+6 courses, [[1, 0], [2, 1], [5, 2], [3, 0], [1, 2], [2, 4]] -&gt; False
+[0, 2, 2, 0]
+[0, 0, 0, 0]
+4 courses, [[1, 0], [2, 0], [2, 3], [1, 3]] -&gt; True
+</pre>
+</div>
+</div>
+
+</div>
+
 </div>
 
 </div>
@@ -15903,20 +15941,59 @@ Space - O(k) - we allocate additional space for k elements</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+<span class="kn">from</span> <span class="nn">heapq</span> <span class="kn">import</span> <span class="n">heappush</span><span class="p">,</span> <span class="n">heappop</span>
+
+<span class="k">def</span> <span class="nf">k_largest_in_binary_heap</span><span class="p">(</span><span class="n">A</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="p">[(</span><span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">)]</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">last</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">out</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">:</span>
+        <span class="n">neg</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">heappop</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">index</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">index</span> <span class="o">+</span> <span class="mi">2</span>
+        <span class="k">if</span> <span class="n">l</span> <span class="o">&lt;</span> <span class="n">last</span><span class="p">:</span>
+            <span class="n">heappush</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="n">A</span><span class="p">[</span><span class="n">l</span><span class="p">],</span> <span class="n">A</span><span class="p">[</span><span class="n">l</span><span class="p">],</span> <span class="n">l</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">r</span> <span class="o">&lt;</span> <span class="n">last</span><span class="p">:</span>
+            <span class="n">heappush</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="n">A</span><span class="p">[</span><span class="n">r</span><span class="p">],</span> <span class="n">A</span><span class="p">[</span><span class="n">r</span><span class="p">],</span> <span class="n">r</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">out</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">k_largest_in_binary_heap</span><span class="p">([</span><span class="mi">561</span><span class="p">,</span><span class="mi">314</span><span class="p">,</span><span class="mi">401</span><span class="p">,</span><span class="mi">28</span><span class="p">,</span><span class="mi">156</span><span class="p">,</span><span class="mi">359</span><span class="p">,</span><span class="mi">271</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="mi">4</span><span class="p">))</span>
 </pre></div>
 
      </div>
 </div>
 </div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>[561, 401, 359, 314]
+</pre>
+</div>
+</div>
+
+</div>
+
 </div>
 
 </div>
